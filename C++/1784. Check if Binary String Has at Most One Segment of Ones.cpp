@@ -1,12 +1,17 @@
 class Solution {
 public:
-    bool checkOnesSegment(string s) {
-        int i = 0;
-        int n = s.size();
+    bool checkOnesSegment(string s)
+    {
+        int found = 0;
+        int seg = 0;
+        for (auto c : s) {
+            found |= c == '1';
+            seg += found && (c == '0');
+            found = !(c == '0');
+        }
 
-        while(s[i] == '1' && i < n) i+=1;
-        while(s[i] == '0'&& i < n) i+=1;
+        seg += found;
 
-        return i == n;
+        return seg <= 1;
     }
 };
