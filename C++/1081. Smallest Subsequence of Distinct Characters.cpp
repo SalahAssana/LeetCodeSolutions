@@ -2,27 +2,29 @@ class Solution {
 public:
     string smallestSubsequence(string s)
     {
-        vector<int> vis(26), num(26);
-        for (char ch : s) {
-            num[ch - 'a']++;
-        }
+        vector<int> count(26, 0), pres(26, 0);
+        int n = s.size();
+        for (auto c : s)
+            count[c - 'a'] += 1;
 
-        string stk;
-        for (char ch : s) {
-            if (!vis[ch - 'a']) {
-                while (!stk.empty() && stk.back() > ch) {
-                    if (num[stk.back() - 'a'] > 0) {
-                        vis[stk.back() - 'a'] = 0;
-                        stk.pop_back();
+        string res;
+        for (char c : s) {
+            if (!pres[c - 'a']) {
+                while (res.size() && res.back() > c) {
+                    if (count[res.back() - 'a'] > 0) {
+                        pres[res.back() - 'a'] = 0;
+                        res.pop_back();
                     } else {
                         break;
                     }
                 }
-                vis[ch - 'a'] = 1;
-                stk.push_back(ch);
+
+                res.push_back(c);
+                pres[c - 'a'] = 1;
             }
-            num[ch - 'a'] -= 1;
+            count[c - 'a'] -= 1;
         }
-        return stk;
+
+        return res;
     }
 };
