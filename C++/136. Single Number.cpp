@@ -1,10 +1,11 @@
-class Solution(object):
-    def singleNumber(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
-        result = 0
-        for num in nums:
-            result ^= num
-        return result
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        int result = 0;
+        for (auto num : nums) {
+            result ^= num;
+        }
+
+        return result;
+    }
+};
